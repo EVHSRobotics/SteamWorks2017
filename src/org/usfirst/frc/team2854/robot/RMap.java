@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2854.robot;
 
-import edu.wpi.first.wpilibj.Talon;
+import com.ctre.CANTalon;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.Talon;
  * floating around.
  */
 public class RMap {
-	public static Talon TALON_0,TALON_1,TALON_2,TALON_3;
+	public static CANTalon TALON_0,TALON_1,TALON_2,TALON_3;
 	public RMap(){
-		TALON_0=new Talon(0);
-		TALON_1=new Talon(1);
-		TALON_2=new Talon(2);
-		TALON_3=new Talon(3);
+		TALON_0=new CANTalon(0); 
+		TALON_1=new CANTalon(1);
+		TALON_2=new CANTalon(2);
+		TALON_3=new CANTalon(3);
 	}
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
