@@ -38,10 +38,11 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		RMap rmap=new RMap();
-		driveSystem=new DriveTrain(RMap.TALON_0,RMap.TALON_1,RMap.TALON_2,RMap.TALON_3);
+		driveSystem=new DriveTrain(rmap.TALON_0,rmap.TALON_1,rmap.TALON_2,rmap.TALON_3);
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		System.out.println("INIT");
 	}
 
 	/**
