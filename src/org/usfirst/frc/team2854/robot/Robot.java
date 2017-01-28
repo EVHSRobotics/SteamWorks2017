@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
-		System.out.println("INIT");
+		System.out.println("Initialized robot");
 	}
 
 	/**
@@ -84,8 +84,7 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		if (autonomousCommand != null)autonomousCommand.start();
 	}
 
 	/**
@@ -99,13 +98,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		System.out.println("Initiation teleop");
-		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt));
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
+		if (autonomousCommand != null)autonomousCommand.cancel();
+		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt));
 	}
 
 	/**

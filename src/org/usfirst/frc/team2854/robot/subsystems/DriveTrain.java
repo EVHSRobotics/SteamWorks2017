@@ -13,6 +13,7 @@ public class DriveTrain extends Subsystem{
 		fr=frontRight;
 		bl=backLeft;
 		br=backRight;
+		System.out.println("DriveTrain initialized");
 	}
 	public void stop(){
 		fl.set(0);
@@ -21,6 +22,7 @@ public class DriveTrain extends Subsystem{
 		br.set(0);
 	}
 	public void tankDrive(double y1,double y2){
+		System.out.println("RT: "+y1+"   LT "+y2);
 		fl.set(y1);fr.set(y2);
 		bl.set(y1);fr.set(y2);
 	}
