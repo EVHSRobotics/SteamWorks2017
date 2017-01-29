@@ -25,9 +25,11 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static DriveTrain driveSystem;
+	public static Climb climbSys;
 
 	Command autonomousCommand;
 	Command drive;
+	Command climbcommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -39,6 +41,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		RMap rmap=new RMap();
 		driveSystem=new DriveTrain(rmap.TALON_0,rmap.TALON_1,rmap.TALON_2,rmap.TALON_3);
+		climbSys= new Climb(rmap.TAlON_4, TAlON_5);
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -104,6 +107,8 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
 		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt));
+		Scheduler.getInstance().add(new Drive(climbSys,oi.controller0.alx));
+
 	}
 
 	/**
