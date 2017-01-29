@@ -14,7 +14,7 @@ public class Climb extends Subsystem{
 		b = back;
 	}
 
-	public void stop(){
+	public void stop(){s
 		f.set(0);
 		b.set(0);
 	}
