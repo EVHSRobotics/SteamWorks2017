@@ -1,15 +1,17 @@
 
 package org.usfirst.frc.team2854.robot;
 
+import org.usfirst.frc.team2854.robot.commands.Drive;
+import org.usfirst.frc.team2854.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2854.robot.subsystems.ExampleSubsystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2854.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2854.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,8 +24,10 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static DriveTrain driveSystem;
 
 	Command autonomousCommand;
+	Command drive;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -33,9 +37,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		RMap rmap=new RMap();
+		driveSystem=new DriveTrain(rmap.TALON_0,rmap.TALON_1,rmap.TALON_2,rmap.TALON_3);
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		System.out.println("Initialized robot");
 	}
 
 	/**
@@ -66,6 +73,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		System.out.println("Initiation autonomous");
 		autonomousCommand = chooser.getSelected();
 
 		/*
@@ -76,8 +84,7 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		if (autonomousCommand != null)autonomousCommand.start();
 	}
 
 	/**
@@ -90,12 +97,13 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		System.out.println("Initiation teleop");
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
+		if (autonomousCommand != null)autonomousCommand.cancel();
+		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt));
 	}
 
 	/**
