@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2854.robot.commands;
 
 import org.usfirst.frc.team2854.robot.oi.Axis;
+import org.usfirst.frc.team2854.robot.subsystems.Climb;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,7 +13,7 @@ public class ClimbCommand extends Command{
 	private Climb climb;
 	private Axis axis1;
 	//axis a2 refers to axis(2) of joystick 0
-    public Drive(Climb climbsub, Axis a2){
+    public ClimbCommand(Climb climbsub, Axis a2){
     	climb = climbsub;
 			axis1 = a2;
     }
@@ -29,7 +30,7 @@ public class ClimbCommand extends Command{
         return false;
     }
     	protected void end(){
-    	driveTrain.stop();
+    	climb.stop();
     }
 
     protected void interrupted(){

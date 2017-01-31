@@ -1,7 +1,9 @@
 
 package org.usfirst.frc.team2854.robot;
 
+import org.usfirst.frc.team2854.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2854.robot.commands.Drive;
+import org.usfirst.frc.team2854.robot.subsystems.Climb;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -104,7 +106,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
 		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt));
-		Scheduler.getInstance().add(new Climb(climbSys,oi.controller0.alx));
+		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller0.alx));
 
 	}
 
