@@ -2,9 +2,7 @@
 package org.usfirst.frc.team2854.robot;
 
 import org.usfirst.frc.team2854.robot.commands.Drive;
-import org.usfirst.frc.team2854.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team2854.robot.subsystems.ExampleSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,7 +20,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static DriveTrain driveSystem;
 	public static Climb climbSys;
@@ -41,8 +38,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		RMap rmap=new RMap();
 		driveSystem=new DriveTrain(rmap.TALON_0,rmap.TALON_1,rmap.TALON_2,rmap.TALON_3);
-		climbSys= new Climb(rmap.TAlON_4, TAlON_5);
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		climbSys= new Climb(rmap.TALON_4, rmap.TALON_5);
+		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		System.out.println("Initialized robot");
@@ -107,7 +104,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
 		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt));
-		Scheduler.getInstance().add(new Drive(climbSys,oi.controller0.alx));
+		Scheduler.getInstance().add(new Climb(climbSys,oi.controller0.alx));
 
 	}
 
