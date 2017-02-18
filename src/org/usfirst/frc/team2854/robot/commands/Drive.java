@@ -25,7 +25,11 @@ public class Drive extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	driveTrain.tankDrive(leftTrigger.deadbandGet(),rightTrigger.deadbandGet());
+    	driveTrain.tankDrive(sigmoid(leftTrigger.deadbandGet()),sigmoid(rightTrigger.deadbandGet()));
+    }
+    //smooth over driving with sigmoid function
+    private double sigmoid(double i){
+    	return 2/(1+Math.pow(Math.E,-5*i))-1;
     }
 
     // Make this return true when this Command no longer needs to run execute()
