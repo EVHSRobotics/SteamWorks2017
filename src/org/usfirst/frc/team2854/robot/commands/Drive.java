@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2854.robot.commands;
 
 import org.usfirst.frc.team2854.robot.oi.Axis;
+import org.usfirst.frc.team2854.robot.oi.Button;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,10 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Drive extends Command{
 	private DriveTrain driveTrain;
 	private Axis leftTrigger,rightTrigger;
-    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT){
+	private Button bt;
+	private boolean back;
+    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT,Button pbt){
     	driveTrain=pDriveTrain;
     	leftTrigger=LT;
     	rightTrigger=RT;
+    	bt=pbt;
+    	back=false;
     }
 
     // Called just before this Command runs the first time
@@ -26,6 +31,12 @@ public class Drive extends Command{
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
     	driveTrain.tankDrive(leftTrigger.deadbandGet(),rightTrigger.deadbandGet());
+    	if(bt.get())
+    		back=!back;
+    	if(back==true)
+    		driveTrain.tankDrive(-leftTrigger.deadbandGet(),-rightTrigger.deadbandGet());
+    	else
+    		driveTrain.tankDrive(leftTrigger.deadbandGet(),rightTrigger.deadbandGet());
     }
 
     // Make this return true when this Command no longer needs to run execute()

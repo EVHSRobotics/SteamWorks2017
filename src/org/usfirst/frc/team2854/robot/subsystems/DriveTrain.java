@@ -23,8 +23,8 @@ public class DriveTrain extends Subsystem{
 	}
 	public void tankDrive(double y1,double y2){
 		System.out.println("RT: "+y1+"   LT "+y2);
-		fl.set(y1);fr.set(y2);
-		bl.set(y1);fr.set(y2);
+		fl.set(y1);fr.set(-y2);
+		bl.set(y1);fr.set(-y2);
 	}
     public void initDefaultCommand(){
         // Set the default command for a subsystem here.

@@ -15,7 +15,7 @@ public class ClimbCommand extends Command{
 	//axis a2 refers to axis(2) of joystick 0
     public ClimbCommand(Climb climbsub, Axis a2){
     	climb = climbsub;
-			axis1 = a2;
+    	axis1 = a2;
     }
 
     protected void initialize(){
@@ -24,12 +24,13 @@ public class ClimbCommand extends Command{
 
     protected void execute(){
     	climb.run(axis1.deadbandGet());
+    	//System.out.println(axis1.deadbandGet() + "rxdfcgvhbjnkjnhbugytfr");
     }
 
     protected boolean isFinished(){
         return false;
     }
-    	protected void end(){
+    protected void end(){
     	climb.stop();
     }
 

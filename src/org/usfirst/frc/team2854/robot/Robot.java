@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		RMap rmap=new RMap();
-		driveSystem=new DriveTrain(rmap.TALON_0,rmap.TALON_1,rmap.TALON_2,rmap.TALON_3);
+		driveSystem=new DriveTrain(rmap.TALON_0,rmap.TALON_1,rmap.TALON_2,rmap.TALON_4);
 		climbSys= new Climb(rmap.TALON_4, rmap.TALON_5);
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -76,6 +76,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		System.out.println("Initiation autonomous");
+		RMap.Servo1.setAngle(45);
+		RMap.Servo2.setAngle(45);
+		
 		autonomousCommand = chooser.getSelected();
 
 		/*
@@ -105,8 +108,8 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
-		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt));
 		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller0.alx));
+		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt,oi.controller0.ba));
 
 	}
 
