@@ -13,13 +13,11 @@ public class Drive extends Command{
 	private DriveTrain driveTrain;
 	private Axis leftTrigger,rightTrigger;
 	private Button bt;
-	private boolean back;
     public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT,Button pbt){
     	driveTrain=pDriveTrain;
     	leftTrigger=LT;
     	rightTrigger=RT;
     	bt=pbt;
-    	back=false;
     }
 
     // Called just before this Command runs the first time
@@ -30,10 +28,7 @@ public class Drive extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	driveTrain.tankDrive(leftTrigger.deadbandGet(),rightTrigger.deadbandGet());
     	if(bt.get())
-    		back=!back;
-    	if(back==true)
     		driveTrain.tankDrive(-leftTrigger.deadbandGet(),-rightTrigger.deadbandGet());
     	else
     		driveTrain.tankDrive(leftTrigger.deadbandGet(),rightTrigger.deadbandGet());

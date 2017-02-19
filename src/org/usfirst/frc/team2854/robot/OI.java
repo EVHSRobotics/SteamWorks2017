@@ -9,9 +9,10 @@ import edu.wpi.first.wpilibj.Joystick;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public final Controller controller0;//player 1
+	public final Controller controller0,controller1;//player 1
 	public OI(){
 		controller0=new Controller(new Joystick(0),.05);
+		controller1=new Controller(new Joystick(0),.05);
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

@@ -22,10 +22,10 @@ public class DriveTrain extends Subsystem{
 		br.set(0);
 	}
 	public void tankDrive(double y1,double y2){
-		System.out.println("RT: "+y1+"   LT "+y2);
-//		fl.set(y2);
-//		fr.set(-y1);
-//		bl.set(y2);
+		System.out.println("RT: "+y1+"   LT: "+y2);
+		fl.set(y2);
+		fr.set(-y1);
+		bl.set(y2);
 		br.set(-y1);
 	}
     public void initDefaultCommand(){

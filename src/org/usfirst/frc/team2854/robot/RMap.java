@@ -13,18 +13,19 @@ import edu.wpi.first.wpilibj.Servo;
  */
 public class RMap {
 	public static Servo Servo1, Servo2;
-	public static CANTalon TALON_0,TALON_1,TALON_2,TALON_3;
-	public static Talon TALON_4,TALON_5,TALON_6;
+	public static CANTalon CANTALON_0,CANTALON_1,CANTALON_2,CANTALON_3;
+	public static Talon DRIVETALON_4,CLIMBTALON_5,CLIMBTALON_6;
 	public RMap(){
 		Servo1 = new Servo(2);
 		//Servo2 = new Servo(3);
-		TALON_0=new CANTalon(0);//fl
-		TALON_1=new CANTalon(1);//fr
-		TALON_2=new CANTalon(2);//bl
-//		TALON_3=new CANTalon(3);//br
-		TALON_6=new Talon(4);
-		TALON_4 = new Talon(0); // talon 4 and 5 are for the climb System
-		TALON_5 = new Talon(1); // talon 4 and 5 are for the climb System
+		CANTALON_0=new CANTalon(0);//fl
+		CANTALON_1=new CANTalon(1);//fr
+		CANTALON_2=new CANTalon(2);//bl
+		CANTALON_3=new CANTalon(3);//br
+		//DRIVETALON_4 = new Talon(4);
+		//TALON_6=new Talon(4);//temp for talon 3
+		CLIMBTALON_6 = new Talon(0); // talon 4 and 5 are for the climb System
+		CLIMBTALON_5 = new Talon(1); // talon 4 and 5 are for the climb System
 		
 	}
 	// For example to map the left and right motors, you could define the
