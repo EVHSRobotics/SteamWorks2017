@@ -21,9 +21,8 @@ public class RMap {
 		CANTALON_0=new CANTalon(0);//fl
 		CANTALON_1=new CANTalon(1);//fr
 		CANTALON_2=new CANTalon(2);//bl
-		CANTALON_3=new CANTalon(3);//br
-		//DRIVETALON_4 = new Talon(4);
-		//TALON_6=new Talon(4);//temp for talon 3
+		CANTALON_3=new CANTalon(3);//br	
+		DRIVETALON_4 = new Talon(4);//temp for cantalon3
 		CLIMBTALON_6 = new Talon(0); // talon 4 and 5 are for the climb System
 		CLIMBTALON_5 = new Talon(1); // talon 4 and 5 are for the climb System
 		
