@@ -2,6 +2,9 @@ package org.usfirst.frc.team2854.robot;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Servo;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -9,12 +12,20 @@ import com.ctre.CANTalon;
  * floating around.
  */
 public class RMap {
-	public static CANTalon TALON_0,TALON_1,TALON_2,TALON_3;
+	public static Servo Servo1, Servo2;
+	public static CANTalon CANTALON_0,CANTALON_1,CANTALON_2,CANTALON_3;
+	public static Talon DRIVETALON_4,CLIMBTALON_5,CLIMBTALON_6;
 	public RMap(){
-		TALON_0=new CANTalon(0); 
-		TALON_1=new CANTalon(1);
-		TALON_2=new CANTalon(2);
-		TALON_3=new CANTalon(3);
+		Servo1 = new Servo(2);
+		//Servo2 = new Servo(3);
+		CANTALON_0=new CANTalon(0);//fl
+		CANTALON_1=new CANTalon(1);//fr
+		CANTALON_2=new CANTalon(2);//bl
+		CANTALON_3=new CANTalon(3);//br	
+		DRIVETALON_4 = new Talon(4);//temp for cantalon3
+		CLIMBTALON_6 = new Talon(0); // talon 4 and 5 are for the climb System
+		CLIMBTALON_5 = new Talon(1); // talon 4 and 5 are for the climb System
+		
 	}
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.

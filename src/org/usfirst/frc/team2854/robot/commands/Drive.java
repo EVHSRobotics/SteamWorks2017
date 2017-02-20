@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2854.robot.commands;
 
 import org.usfirst.frc.team2854.robot.oi.Axis;
+import org.usfirst.frc.team2854.robot.oi.Button;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,10 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Drive extends Command{
 	private DriveTrain driveTrain;
 	private Axis leftTrigger,rightTrigger;
-    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT){
+	private Button bt;
+    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT,Button pbt){
     	driveTrain=pDriveTrain;
     	leftTrigger=LT;
     	rightTrigger=RT;
+    	bt=pbt;
     }
 
     // Called just before this Command runs the first time
@@ -25,8 +28,12 @@ public class Drive extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	driveTrain.tankDrive(sigmoid(leftTrigger.deadbandGet()),sigmoid(rightTrigger.deadbandGet()));
+    	if(bt.get())
+    		driveTrain.tankDrive(-sigmoid(leftTrigger.deadbandGet()),-sigmoid(rightTrigger.deadbandGet()));
+    	else
+    		driveTrain.tankDrive(sigmoid(leftTrigger.deadbandGet()),sigmoid(rightTrigger.deadbandGet()));
     }
+
     //smooth over driving with sigmoid function
     private double sigmoid(double i){
     	return 2/(1+Math.pow(Math.E,-7*Math.pow(i,3)))-1;
