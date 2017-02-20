@@ -6,39 +6,45 @@ import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * @author Richard Huang
+ * @author Rishi Paarikh
  */
-public class Drive extends Command{
+public class AutoDrive extends Command{
 	private DriveTrain driveTrain;
-	private Axis leftTrigger,rightTrigger, Leftaxis;
-    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT, Axis LX){
+	private Encoder left, right;
+    public AutoDrive(DriveTrain pDriveTrain, Encoder a, Encoder b){
     	Leftaxis = LX; // left trigger
     	driveTrain=pDriveTrain;
-    	leftTrigger=LT;
-    	rightTrigger=RT;
+    	left = a;
+    	right = b;
     }
 
     // Called just before this Command runs the first time
     protected void initialize(){
-    	System.out.println("Initialized drive command");
     	requires(driveTrain);
+    	int leftStart = left.get();
+    	int rightStart = right.get();
+    	System.out.println("Initialized drive command");
+    	int finalLeft1 = 700;
+    	int finalRight2 = 500;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	//driveTrain.tankDrive(leftTrigger.deadbandGet(),rightTrigger.deadbandGet());
-    	double total = (leftTrigger.deadbandGet() - rightTrigger.deadbandGet());
-    	total = 1/(0.96034 + 16*Math.pow(Math.E, -6*Math.abs(total)))*Math.signum(total);
-    	double lDrive = total;
-    	double RDrive = total;
-    	double turn = Leftaxis.deadbandGet();
-    	turn = 1/(0.96034 + 16*Math.pow(Math.E, -6*Math.abs(turn)))*Math.signum(turn);
-    	lDrive -= turn;
-    	RDrive += turn;
-    	driveTrain.tankDrive(lDrive,RDrive);
-    	
-    	
-    }
+    	if(left.get() - leftStart < finalLeft1){
+    		driveTrain.leftDrive(.5);
+    	}
+    	else{
+    		driveTrain.leftDrive(0);
+    	}
+    	if(right.get() - rightStart < finalRight1){
+    		driveTrain.rightDrive(0.5);
+    		driveTrain.leftDrive(0.5);
+    	}
+    	else{
+    		driveTrain.rightDrive(0);
+    		driveTrain.leftDrive(0);
+    	}
+    	}
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished(){
@@ -47,8 +53,9 @@ public class Drive extends Command{
 
     // Called once after isFinished returns true
     protected void end(){
-    	driveTrain.stop();
-    }
+    	driveTrain.leftDrive(0);
+    	driveTrain.rightDrive(0);
+    	driveTrain.stop();    }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
