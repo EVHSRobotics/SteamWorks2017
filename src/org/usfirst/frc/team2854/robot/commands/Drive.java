@@ -29,7 +29,7 @@ public class Drive extends Command{
     }
     //smooth over driving with sigmoid function
     private double sigmoid(double i){
-    	return 2/(1+Math.pow(Math.E,-5*i))-1;
+    	return 2/(1+Math.pow(Math.E,-7*Math.pow(i,3)))-1;
     }
 
     // Make this return true when this Command no longer needs to run execute()
