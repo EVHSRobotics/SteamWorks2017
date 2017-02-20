@@ -16,7 +16,7 @@ public class RMap {
 	public static CANTalon TALON_0,TALON_1,TALON_2,TALON_3;
 	public static Talon TALON_4,TALON_5;
 	public static Servo Servo1, Servo2;
-	public static Encoder Encoder_01, Encoder_23;	
+	public static Encoder ENCODER_01, ENCODER_23;	
 	public RMap(){
 		TALON_0=new CANTalon(0);
 		TALON_1=new CANTalon(1);
