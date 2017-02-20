@@ -2,7 +2,6 @@ package org.usfirst.frc.team2854.robot;
 
 import com.ctre.CANTalon;
 
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 
 /**
@@ -14,6 +13,7 @@ import edu.wpi.first.wpilibj.Talon;
 public class RMap {
 	public static CANTalon TALON_0,TALON_1,TALON_2,TALON_3;
 	public static Talon TALON_4,TALON_5;
+	public static Servo Servo1;
 	public RMap(){
 		TALON_0=new CANTalon(0);
 		TALON_1=new CANTalon(1);
@@ -21,6 +21,8 @@ public class RMap {
 		TALON_3=new CANTalon(3);
 		TALON_4 = new Talon(0); // talon 4 and 5 are for the climb System
 		TALON_5 = new Talon(1); // talon 4 and 5 are for the climb System
+		Servo1 = new Servo(2);
+		Servo2 = new Servo(3);
 
 	}
 	// For example to map the left and right motors, you could define the

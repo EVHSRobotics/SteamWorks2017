@@ -10,8 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Drive extends Command{
 	private DriveTrain driveTrain;
-	private Axis leftTrigger,rightTrigger;
-    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT){
+	private Axis leftTrigger,rightTrigger, Leftaxis;
+    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT, Axis LX){
+    	Leftaxis = LX; // left trigger
     	driveTrain=pDriveTrain;
     	leftTrigger=LT;
     	rightTrigger=RT;
@@ -25,7 +26,17 @@ public class Drive extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	driveTrain.tankDrive(leftTrigger.deadbandGet(),rightTrigger.deadbandGet());
+    	//driveTrain.tankDrive(leftTrigger.deadbandGet(),rightTrigger.deadbandGet());
+    	double total = (leftTrigger.deadbandGet() - rightTrigger.deadbandGet());
+    	total = 1/(0.96034 + 16*Math.pow(Math.E, -6*Math.abs(total)))*Math.signum(total);
+    	double lDrive = total;
+    	double RDrive = total;
+    	double turn = Leftaxis.deadbandGet();
+    	lDrive -= turn;
+    	RDrive += turn;
+    	driveTrain.tankDrive(lDrive,RDrive);
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
