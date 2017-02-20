@@ -21,7 +21,7 @@ public class GearCommand extends Command{
     }
 
     protected void initialize(){
-    	requires(Gears);
+    	requires(gear);
     }
 
     protected void execute(){
@@ -38,10 +38,10 @@ public class GearCommand extends Command{
         return false;
     }
     	protected void end(){
-    	Gears.stop();
+    	gear.stop();
     }
 
     protected void interrupted(){
-    	Gears.stop();
+    	gear.stop();
     }
 }

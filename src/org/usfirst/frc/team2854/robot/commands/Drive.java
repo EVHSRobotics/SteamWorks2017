@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2854.robot.commands;
 
 import org.usfirst.frc.team2854.robot.oi.Axis;
+import org.usfirst.frc.team2854.robot.oi.Button;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Drive extends Command{
 	private DriveTrain driveTrain;
-	private Axis leftTrigger,rightTrigger, Leftaxis;
-    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT, Axis LX){
-    	Leftaxis = LX; // left trigger
+	private Axis leftTrigger,rightTrigger,rightAxis;
+    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT, Axis RX){
+    	rightAxis = RX; // left trigger
     	driveTrain=pDriveTrain;
     	leftTrigger=LT;
     	rightTrigger=RT;
@@ -26,18 +27,17 @@ public class Drive extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	//driveTrain.tankDrive(leftTrigger.deadbandGet(),rightTrigger.deadbandGet());
-    	double total = (leftTrigger.deadbandGet() - rightTrigger.deadbandGet());
-    	total = 1/(0.96034 + 16*Math.pow(Math.E, -6*Math.abs(total)))*Math.signum(total);
-    	double lDrive = total;
-    	double RDrive = total;
-    	double turn = Leftaxis.deadbandGet();
-    	turn = 1/(0.96034 + 16*Math.pow(Math.E, -6*Math.abs(turn)))*Math.signum(turn);
+    	double total = sigmoid(leftTrigger.deadbandGet()-rightTrigger.deadbandGet());
+    	double lDrive=total,rDrive=total;
+    	double turn = sigmoid(rightAxis.deadbandGet());
     	lDrive -= turn;
-    	RDrive += turn;
-    	driveTrain.tankDrive(lDrive,RDrive);
-    	
-    	
+    	rDrive += turn;
+    	driveTrain.tankDrive(lDrive,rDrive);
+    }
+
+    //smooth over driving with sigmoid function
+    private double sigmoid(double i){
+    	return 2/(1+Math.pow(Math.E,-7*Math.pow(i,3)))-1;
     }
 
     // Make this return true when this Command no longer needs to run execute()
