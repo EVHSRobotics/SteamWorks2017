@@ -3,8 +3,10 @@ package org.usfirst.frc.team2854.robot;
 
 import org.usfirst.frc.team2854.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2854.robot.commands.Drive;
+import org.usfirst.frc.team2854.robot.commands.GearCommand;
 import org.usfirst.frc.team2854.robot.subsystems.Climb;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2854.robot.subsystems.Gears;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveTrain driveSystem;
 	public static Climb climbSys;
+	public static Gears gearsys;
 
 	Command autonomousCommand;
 	Command drive;
@@ -41,6 +44,7 @@ public class Robot extends IterativeRobot {
 		RMap rmap=new RMap();
 		driveSystem=new DriveTrain(rmap.CANTALON_0,rmap.CANTALON_1,rmap.CANTALON_2,rmap.CANTALON_3);
 		climbSys= new Climb(rmap.CLIMBTALON_6, rmap.CLIMBTALON_5);
+		gearsys=new Gears(rmap.Servo2,rmap.Servo3);
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -76,7 +80,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		System.out.println("Initiation autonomous");
-		RMap.Servo1.setAngle(45);
+		RMap.Servo2.setAngle(45);
+		RMap.Servo3.setAngle(30);
 		
 		autonomousCommand = chooser.getSelected();
 
@@ -109,6 +114,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)autonomousCommand.cancel();
 		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt,oi.controller0.arx));
 		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller0.alx));
+		Scheduler.getInstance().add(new GearCommand(gearsys,oi.controller1.bb));
 	}
 
 	/**

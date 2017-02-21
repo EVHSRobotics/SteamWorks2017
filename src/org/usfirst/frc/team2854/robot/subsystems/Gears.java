@@ -22,11 +22,11 @@ public class Gears extends Subsystem{
 	public void switchState(Boolean a){
 		if(a){
 			servo1.setAngle(90);
-			servo2.setAngle(90);
+			servo2.setAngle(0);
 		}
 		else{
 			servo1.setAngle(45);
-			servo2.setAngle(45);
+			servo2.setAngle(30);
 		}
 		
 	}

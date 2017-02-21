@@ -23,7 +23,6 @@ public class Climb extends Subsystem{
 		double yVal = Math.pow(x, 3);
 		f.set(yVal);
 		b.set(yVal);
-		System.out.println("Climb: "+yVal);
 		}
     public void initDefaultCommand(){
 			f.set(0);

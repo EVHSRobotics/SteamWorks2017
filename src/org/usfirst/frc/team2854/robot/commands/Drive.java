@@ -27,17 +27,21 @@ public class Drive extends Command{
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	double total = sigmoid(leftTrigger.deadbandGet()-rightTrigger.deadbandGet());
+    	double total = sigmoid(rightTrigger.deadbandGet()-leftTrigger.deadbandGet());
     	double lDrive=total,rDrive=total;
     	double turn = sigmoid(rightAxis.deadbandGet());
     	lDrive -= turn;
     	rDrive += turn;
-    	driveTrain.tankDrive(lDrive,rDrive);
+    	driveTrain.tankDrive(ensure(lDrive),ensure(rDrive));
     }
 
     //smooth over driving with sigmoid function
     private double sigmoid(double i){
     	return 2/(1+Math.pow(Math.E,-7*Math.pow(i,3)))-1;
+    }
+    
+    private double ensure(double value){
+    	   return Math.min(Math.max(value,-1),1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
