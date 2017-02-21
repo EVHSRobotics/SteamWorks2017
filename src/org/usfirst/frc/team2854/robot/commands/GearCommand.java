@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class GearCommand extends Command{
 	private Gears gear;
 	private Button button1;
-	Boolean isPressed;
 	//axis a2 refers to axis(2) of joystick 0
     public GearCommand(Gears gears, Button a){
     	gear = gears;
@@ -25,13 +24,10 @@ public class GearCommand extends Command{
     }
 
     protected void execute(){
-    	if(button1.getHold()){
-    		isPressed = true;
-    	}
-    	else{
-    		isPressed = false;
-    	}
-    	gear.switchState(isPressed);
+    	if(button1.get())
+    		gear.stateOn();
+    	else
+    		gear.stateOff();
     }
 
     protected boolean isFinished(){

@@ -19,15 +19,13 @@ public class Gears extends Subsystem{
 		servo2.setAngle(45);
 
 	}
-	public void switchState(Boolean a){
-		if(a){
-			servo1.setAngle(90);
-			servo2.setAngle(0);
-		}
-		else{
-			servo1.setAngle(45);
-			servo2.setAngle(30);
-		}
+	public void stateOff(){
+		servo1.setAngle(135);
+		servo2.setAngle(0);
+	}
+	public void stateOn(){
+		servo1.setAngle(45);
+		servo2.setAngle(30);
 		
 	}
     public void initDefaultCommand(){
