@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2854.robot;
 
+import org.usfirst.frc.team2854.robot.commands.AutoDrive;
 import org.usfirst.frc.team2854.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2854.robot.commands.Drive;
 import org.usfirst.frc.team2854.robot.commands.GearCommand;
@@ -49,6 +50,8 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		System.out.println("Initialized robot");
+		
+		autonomousCommand=new AutoDrive(driveSystem);
 	}
 
 	/**
@@ -82,8 +85,6 @@ public class Robot extends IterativeRobot {
 		System.out.println("Initiation autonomous");
 		RMap.Servo2.setAngle(45);
 		RMap.Servo3.setAngle(30);
-		
-		autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
