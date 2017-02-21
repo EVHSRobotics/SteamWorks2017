@@ -21,7 +21,6 @@ public class AutoDrive extends Command{
 
     // Called just before this Command runs the first time
     protected void initialize(){
-    	requires(driveTrain);
     	leftStart = left.get();
     	rightStart = right.get();
     	System.out.println("Initialized drive command");
