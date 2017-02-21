@@ -1,8 +1,8 @@
 package org.usfirst.frc.team2854.robot.commands;
 
-import org.usfirst.frc.team2854.robot.oi.Axis;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutoDrive extends Command{
 	private DriveTrain driveTrain;
 	private Encoder left, right;
+	int leftStart, rightStart, finalLeft1, finalRight1;
     public AutoDrive(DriveTrain pDriveTrain, Encoder a, Encoder b){
-    	Leftaxis = LX; // left trigger
+    	//Leftaxis = LX; // left trigger
     	driveTrain=pDriveTrain;
     	left = a;
     	right = b;
@@ -21,13 +22,12 @@ public class AutoDrive extends Command{
     // Called just before this Command runs the first time
     protected void initialize(){
     	requires(driveTrain);
-    	int leftStart = left.get();
-    	int rightStart = right.get();
+    	leftStart = left.get();
+    	rightStart = right.get();
     	System.out.println("Initialized drive command");
-    	int finalLeft1 = 700;
-    	int finalRight2 = 500;
+    	finalLeft1 = 100;
+    	finalRight1 = 100;
     }
-
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
     	if(left.get() - leftStart < finalLeft1){
