@@ -84,7 +84,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		System.out.println("Initiation autonomous");
 		RMap.Servo2.setAngle(45);
-		RMap.Servo3.setAngle(30);
+		RMap.Servo3.setAngle(75);
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

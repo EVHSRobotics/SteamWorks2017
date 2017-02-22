@@ -28,15 +28,6 @@ public class DriveTrain extends Subsystem{
 		bl.set(y2);
 		br.set(-y1);
 	}
-	public void leftDrive(double y1){
-		fl.set(y1);
-		bl.set(y1);
-	}
-	public void rightDrive(double y1){
-		fr.set(y1);
-		br.set(y1);
-	}
-	
     public void initDefaultCommand(){
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

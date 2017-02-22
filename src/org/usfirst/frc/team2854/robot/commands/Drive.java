@@ -41,7 +41,7 @@ public class Drive extends Command{
     }
     
     private double ensure(double value){
-    	   return Math.min(Math.max(value,-1),1);
+    	return Math.min(Math.max(value,-1),1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
