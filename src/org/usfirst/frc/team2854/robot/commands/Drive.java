@@ -29,7 +29,7 @@ public class Drive extends Command{
     protected void execute(){
     	double total = sigmoid(rightTrigger.deadbandGet()-leftTrigger.deadbandGet());
     	double lDrive=total,rDrive=total;
-    	double turn = sigmoid(leftAxis.deadbandGet()/2);
+    	double turn = sigmoid(leftAxis.deadbandGet()/1.5);
     	lDrive -= turn;
     	rDrive += turn;
     	driveTrain.tankDrive(ensure(lDrive),ensure(rDrive));
