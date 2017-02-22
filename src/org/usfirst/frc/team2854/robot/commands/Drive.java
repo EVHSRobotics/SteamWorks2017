@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Drive extends Command{
 	private DriveTrain driveTrain;
-	private Axis leftTrigger,rightTrigger,rightAxis;
+	private Axis leftTrigger,rightTrigger,leftAxis;
     public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT, Axis RX){
-    	rightAxis = RX; // left trigger
+    	leftAxis = RX; // left trigger
     	driveTrain=pDriveTrain;
     	leftTrigger=LT;
     	rightTrigger=RT;
@@ -29,7 +29,7 @@ public class Drive extends Command{
     protected void execute(){
     	double total = sigmoid(rightTrigger.deadbandGet()-leftTrigger.deadbandGet());
     	double lDrive=total,rDrive=total;
-    	double turn = sigmoid(rightAxis.deadbandGet());
+    	double turn = sigmoid(leftAxis.deadbandGet()/2);
     	lDrive -= turn;
     	rDrive += turn;
     	driveTrain.tankDrive(ensure(lDrive),ensure(rDrive));
