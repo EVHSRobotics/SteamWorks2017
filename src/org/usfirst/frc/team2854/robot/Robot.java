@@ -113,8 +113,8 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
-		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt,oi.controller0.arx));
-		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller0.alx));
+		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt,oi.controller0.alx));
+		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller0.arx));
 		Scheduler.getInstance().add(new GearCommand(gearsys,oi.controller1.bb));
 	}
 

@@ -17,7 +17,7 @@ public class AutoDrive extends Command{
     	driveTrain=pDriveTrain;
     	left = a;
     	right = b;
-    	finalLeft1=500;
+    	finalLeft1=300;
     }
 
     // Called just before this Command runs the first time
@@ -29,7 +29,7 @@ public class AutoDrive extends Command{
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
     	while(Math.abs(left.get())< finalLeft1){
-    		driveTrain.tankDrive(.2,.2);
+    		driveTrain.tankDrive(.2,.25);
     	}
     		driveTrain.stop();
     	System.out.println("Encoder: "+left.get());
