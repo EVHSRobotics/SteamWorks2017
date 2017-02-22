@@ -1,10 +1,13 @@
 
 package org.usfirst.frc.team2854.robot;
 
+import org.usfirst.frc.team2854.robot.commands.AutoDrive;
+import org.usfirst.frc.team2854.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2854.robot.commands.Drive;
-import org.usfirst.frc.team2854.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2854.robot.commands.GearCommand;
+import org.usfirst.frc.team2854.robot.subsystems.Climb;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team2854.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2854.robot.subsystems.Gears;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,12 +25,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static DriveTrain driveSystem;
+	public static Climb climbSys;
+	public static Gears gearsys;
 
 	Command autonomousCommand;
 	Command drive;
+	Command climbcommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
@@ -38,11 +43,15 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		RMap rmap=new RMap();
-		driveSystem=new DriveTrain(rmap.TALON_0,rmap.TALON_1,rmap.TALON_2,rmap.TALON_3);
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		driveSystem=new DriveTrain(rmap.CANTALON_0,rmap.CANTALON_1,rmap.CANTALON_2,rmap.CANTALON_3);
+		climbSys= new Climb(rmap.CLIMBTALON_6, rmap.CLIMBTALON_5);
+		gearsys=new Gears(rmap.Servo2,rmap.Servo3);
+		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		System.out.println("Initialized robot");
+		
+		autonomousCommand=new AutoDrive(driveSystem,rmap.ENCODER_01,rmap.ENCODER_23);
 	}
 
 	/**
@@ -74,7 +83,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		System.out.println("Initiation autonomous");
-		autonomousCommand = chooser.getSelected();
+		RMap.Servo2.setAngle(45);
+		RMap.Servo3.setAngle(75);
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -103,7 +113,9 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
-		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt));
+		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt,oi.controller0.alx));
+		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller0.arx));
+		Scheduler.getInstance().add(new GearCommand(gearsys,oi.controller1.bb));
 	}
 
 	/**

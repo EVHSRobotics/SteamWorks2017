@@ -1,49 +1,39 @@
 package org.usfirst.frc.team2854.robot.commands;
 
-import org.usfirst.frc.team2854.robot.oi.Axis;
-import org.usfirst.frc.team2854.robot.oi.Button;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * @author Richard Huang
+ * @author Rishi Paarikh
  */
-public class Drive extends Command{
+public class AutoDrive extends Command{
 	private DriveTrain driveTrain;
-	private Axis leftTrigger,rightTrigger,leftAxis;
-    public Drive(DriveTrain pDriveTrain,Axis LT,Axis RT, Axis RX){
-    	leftAxis = RX; // left trigger
+	private Encoder left, right;
+	int finalLeft1, finalRight1;
+    public AutoDrive(DriveTrain pDriveTrain, Encoder a, Encoder b){
+    	//Leftaxis = LX; // left trigger
     	driveTrain=pDriveTrain;
-    	leftTrigger=LT;
-    	rightTrigger=RT;
+    	left = a;
+    	right = b;
+    	finalLeft1=300;
     }
 
     // Called just before this Command runs the first time
     protected void initialize(){
+    	left.reset();
+    	right.reset();
     	System.out.println("Initialized drive command");
-    	requires(driveTrain);
     }
-
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	double total = sigmoid(rightTrigger.deadbandGet()-leftTrigger.deadbandGet());
-    	double lDrive=total,rDrive=total;
-    	double turn = sigmoid(leftAxis.deadbandGet()/1.5);
-    	lDrive -= turn;
-    	rDrive += turn;
-    	driveTrain.tankDrive(ensure(lDrive),ensure(rDrive));
+    	while(Math.abs(left.get())< finalLeft1){
+    		driveTrain.tankDrive(.2,.25);
+    	}
+    		driveTrain.stop();
+    	System.out.println("Encoder: "+left.get());
     }
-
-    //smooth over driving with sigmoid function
-    private double sigmoid(double i){
-    	return 2/(1+Math.pow(Math.E,-7*Math.pow(i,3)))-1;
-    }
-    
-    private double ensure(double value){
-    	return Math.min(Math.max(value,-1),1);
-    }
-
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished(){
         return false;
