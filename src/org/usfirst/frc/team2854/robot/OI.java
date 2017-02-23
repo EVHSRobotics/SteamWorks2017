@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 	public final Controller controller0,controller1;//player 1
 	public OI(){
-		controller0=new Controller(new Joystick(0),.05);
-		controller1=new Controller(new Joystick(0),.05);
+		controller0=new Controller(new Joystick(0),.05);//driving
+		controller1=new Controller(new Joystick(0),.05);//secondary operations
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

@@ -17,7 +17,6 @@ public class Gears extends Subsystem{
 	public void stop(){
 		servo1.setAngle(45);
 		servo2.setAngle(45);
-
 	}
 	public void stateOff(){
 		servo1.setAngle(135);
@@ -26,7 +25,6 @@ public class Gears extends Subsystem{
 	public void stateOn(){
 		servo1.setAngle(45);
 		servo2.setAngle(90);
-		
 	}
     public void initDefaultCommand(){
         // Set the default command for a subsystem here.

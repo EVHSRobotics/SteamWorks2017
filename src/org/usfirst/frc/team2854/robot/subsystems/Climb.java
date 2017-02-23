@@ -13,19 +13,16 @@ public class Climb extends Subsystem{
 		f = front;
 		b = back;
 	}
-
 	public void stop(){
 		f.set(0);
 		b.set(0);
 	}
-
 	public void run(double x){
 		double yVal = Math.pow(x, 3);
 		f.set(yVal);
 		b.set(yVal);
-		}
+	}
     public void initDefaultCommand(){
-			f.set(0);
-			b.set(0);
+    	
     }
 }

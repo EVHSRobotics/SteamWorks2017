@@ -18,25 +18,21 @@ public class GearCommand extends Command{
     	gear = gears;
     	button1 = a;
     }
-
     protected void initialize(){
     	requires(gear);
     }
-
     protected void execute(){
     	if(button1.get())
     		gear.stateOn();
     	else
     		gear.stateOff();
     }
-
     protected boolean isFinished(){
         return false;
     }
     	protected void end(){
     	gear.stop();
     }
-
     protected void interrupted(){
     	gear.stop();
     }

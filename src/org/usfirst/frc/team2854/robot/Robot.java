@@ -84,7 +84,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		System.out.println("Initiation autonomous");
 		RMap.Servo2.setAngle(45);
-		RMap.Servo3.setAngle(75);
+		RMap.Servo3.setAngle(90);
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -114,7 +114,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
 		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt,oi.controller0.alx));
-		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller0.arx));
+		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller1.arx));
 		Scheduler.getInstance().add(new GearCommand(gearsys,oi.controller1.bb));
 	}
 

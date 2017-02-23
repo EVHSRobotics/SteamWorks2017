@@ -19,7 +19,6 @@ public class AutoDrive extends Command{
     	right = b;
     	finalLeft1=300;
     }
-
     // Called just before this Command runs the first time
     protected void initialize(){
     	left.reset();
@@ -38,12 +37,10 @@ public class AutoDrive extends Command{
     protected boolean isFinished(){
         return false;
     }
-
     // Called once after isFinished returns true
     protected void end(){
     	driveTrain.stop();
     }
-
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted(){

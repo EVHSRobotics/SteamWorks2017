@@ -17,23 +17,19 @@ public class ClimbCommand extends Command{
     	climb = climbsub;
     	axis1 = a2;
     }
-
     protected void initialize(){
     	requires(climb);
     }
-
     protected void execute(){
     	climb.run(axis1.deadbandGet());
     	//System.out.println(axis1.deadbandGet() + "rxdfcgvhbjnkjnhbugytfr");
     }
-
     protected boolean isFinished(){
         return false;
     }
     protected void end(){
     	climb.stop();
     }
-
     protected void interrupted(){
     	climb.stop();
     }
