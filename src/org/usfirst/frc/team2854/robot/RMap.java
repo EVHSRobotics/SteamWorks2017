@@ -1,10 +1,11 @@
 package org.usfirst.frc.team2854.robot;
 
 import com.ctre.CANTalon;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Servo;
+
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -17,6 +18,7 @@ public class RMap {
 	public static CANTalon CANTALON_0,CANTALON_1,CANTALON_2,CANTALON_3;
 	public static Talon CANTALON_4,CLIMBTALON_5,CLIMBTALON_6;
 	public static Encoder ENCODER_01, ENCODER_23;
+	public static Ultrasonic uTest;
 	public RMap(){
 		CANTALON_0=new CANTalon(0);//fl
 		CANTALON_1=new CANTalon(1);//fr
@@ -32,6 +34,8 @@ public class RMap {
 		
 		ENCODER_23 = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
 		ENCODER_01 = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+		
+		uTest=new Ultrasonic(10,11);//find pwm values
 	}
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
