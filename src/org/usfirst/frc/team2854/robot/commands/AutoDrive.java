@@ -12,16 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutoDrive extends Command{
 	private DriveTrain driveTrain;
 	private Encoder left, right;
-	private Button ba;
 	int finalLeft1, finalRight1;
 	long temp;
-    public AutoDrive(DriveTrain pDriveTrain, Encoder a, Encoder b,Button pba){
+    public AutoDrive(DriveTrain pDriveTrain, Encoder a, Encoder b){
     	//Leftaxis = LX; // left trigger
     	driveTrain=pDriveTrain;
     	left = a;
     	right = b;
     	finalLeft1=300;
-    	pba=ba;
     }
     // Called just before this Command runs the first time
     protected void initialize(){
@@ -32,13 +30,13 @@ public class AutoDrive extends Command{
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	driveTrain.tankDrive(.2,.16);
+    	driveTrain.tankDrive(.3,.2);
     	System.out.println((System.nanoTime()-temp)/1000000000);
     	System.out.println("Encoder: "+left.get());
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished(){
-    	if(Math.abs(System.nanoTime()-temp)>13*Math.pow(10, 9)){
+    	if(left.get()>300||Math.abs(System.nanoTime()-temp)>13*Math.pow(10, 9)){
     		System.out.println("Auto finished");
     		return true;
     	}
