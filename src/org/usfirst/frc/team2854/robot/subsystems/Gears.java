@@ -18,11 +18,11 @@ public class Gears extends Subsystem{
 		servo1.setAngle(45);
 		servo2.setAngle(45);
 	}
-	public void stateOff(){
+	public void close(){
 		servo1.setAngle(135);
 		servo2.setAngle(0);
 	}
-	public void stateOn(){
+	public void open(){
 		servo1.setAngle(45);
 		servo2.setAngle(90);
 	}
