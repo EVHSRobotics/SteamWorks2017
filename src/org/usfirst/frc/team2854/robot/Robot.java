@@ -9,6 +9,8 @@ import org.usfirst.frc.team2854.robot.subsystems.Climb;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2854.robot.subsystems.Gears;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveSystem;
 	public static Climb climbSys;
 	public static Gears gearsys;
+	CameraServer server; 
 
 	Command autonomousCommand;
 	Command drive;
@@ -46,6 +49,8 @@ public class Robot extends IterativeRobot {
 		driveSystem=new DriveTrain(rmap.CANTALON_0,rmap.CANTALON_1,rmap.CANTALON_2,rmap.CANTALON_3);
 		climbSys= new Climb(rmap.CLIMBTALON_6, rmap.CLIMBTALON_5);
 		gearsys=new Gears(rmap.Servo2,rmap.Servo3);
+		server=CameraServer.getInstance();
+		server.startAutomaticCapture();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
