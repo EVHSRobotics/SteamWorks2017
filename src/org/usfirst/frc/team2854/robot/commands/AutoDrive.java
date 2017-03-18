@@ -30,7 +30,7 @@ public class AutoDrive extends Command{
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	driveTrain.tankDrive(.3,.2);
+    	driveTrain.tankDrive(.3,.3);
     	System.out.println((System.nanoTime()-temp)/1000000000);
     	System.out.println("Encoder: "+left.get());
     }
