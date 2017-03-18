@@ -14,7 +14,7 @@ public class AutoDrive extends Command{
 	private Encoder left, right;
 	private Button ba;
 	int finalLeft1, finalRight1;
-	private long temp=System.nanoTime();
+	long temp;
     public AutoDrive(DriveTrain pDriveTrain, Encoder a, Encoder b,Button pba){
     	//Leftaxis = LX; // left trigger
     	driveTrain=pDriveTrain;
@@ -27,22 +27,23 @@ public class AutoDrive extends Command{
     protected void initialize(){
     	left.reset();
     	right.reset();
+    	temp=System.nanoTime();
     	System.out.println("Initialized drive command");
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	while(Math.abs(left.get())< finalLeft1&&Math.abs(System.nanoTime()-temp)<13*Math.pow(10, 9)){
-    		driveTrain.tankDrive(.2,.14);
-    		if(ba.get())
-    			break;
-    	}
-    	System.out.println("Auto finished");
-    	driveTrain.stop();
+    	driveTrain.tankDrive(.2,.16);
+    	System.out.println((System.nanoTime()-temp)/1000000000);
     	System.out.println("Encoder: "+left.get());
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished(){
-        return false;
+    	if(Math.abs(System.nanoTime()-temp)>13*Math.pow(10, 9)){
+    		System.out.println("Auto finished");
+    		return true;
+    	}
+    	else
+    		return false;
     }
     // Called once after isFinished returns true
     protected void end(){
