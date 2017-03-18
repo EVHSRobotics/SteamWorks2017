@@ -21,12 +21,17 @@ public class USonicPrint extends Command{
 	}
 	@Override
 	protected void initialize(){
-		requires(driveSystem);
+		//requires(driveSystem);
+		//uLeft.setEnabled(true);
+		//uRight.setEnabled(true);
+	
+		uLeft.setAutomaticMode(true);
+		uRight.setAutomaticMode(true);
 	}
 
 	@Override
 	protected void execute(){
-		power = pFunction((uLeft.getRangeInches() - uRight.getRangeInches()));
+		//power = pFunction((uLeft.getRangeInches() - uRight.getRangeInches()));
 //		driveSystem.tankDrive(power*pScale, -power*pScale);
 		System.out.println("uLeft Distance:"+uLeft.getRangeInches());
 		System.out.println("uRIght Distance0" + uRight.getRangeInches());
@@ -34,7 +39,9 @@ public class USonicPrint extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		return (uLeft.getRangeInches() - uRight.getRangeInches()) > dD;
+		return false;
+		
+		//return (uLeft.getRangeInches() - uRight.getRangeInches()) > dD;
 	}
 	
 	private double pFunction(double dD){

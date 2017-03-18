@@ -23,9 +23,9 @@ public class GearCommand extends Command{
     }
     protected void execute(){
     	if(button1.get())
-    		gear.stateOn();
+    		gear.close();
     	else
-    		gear.stateOff();
+    		gear.open();
     }
     protected boolean isFinished(){
         return false;
