@@ -19,6 +19,7 @@ public class Climb extends Subsystem{
 	}
 	public void run(double x){
 		double yVal = Math.pow(x, 3);
+		yVal = -(Math.abs(yVal));
 		f.set(yVal);
 		b.set(yVal);
 	}
