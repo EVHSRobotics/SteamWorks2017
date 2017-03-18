@@ -5,6 +5,7 @@ import org.usfirst.frc.team2854.robot.commands.AutoDrive;
 import org.usfirst.frc.team2854.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2854.robot.commands.Drive;
 import org.usfirst.frc.team2854.robot.commands.GearCommand;
+import org.usfirst.frc.team2854.robot.commands.USonicPrint;
 import org.usfirst.frc.team2854.robot.subsystems.Climb;
 import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2854.robot.subsystems.Gears;
@@ -109,13 +110,15 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		System.out.println("Initiation teleop");
 		// This makes sure that the autonomous stops running when
+		
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
-		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt,oi.controller0.alx));
+//		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt,oi.controller0.alx));
 		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller1.arx));
 		Scheduler.getInstance().add(new GearCommand(gearsys,oi.controller1.bb));
+		Scheduler.getInstance().add(new USonicPrint(driveSystem,7,6,9,8));
 	}
 
 	/**

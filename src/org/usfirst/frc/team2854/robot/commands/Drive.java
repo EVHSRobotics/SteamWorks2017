@@ -34,7 +34,7 @@ public class Drive extends Command{
     }
     //smooth over driving with sigmoid function
     private double sigmoid(double i){
-    	return 2/(1+Math.pow(Math.E,-7*Math.pow(i,3)))-1;//1/(1+e^(-7x^3))
+    	return 2/(1+Math.pow(Math.E,-7*Math.pow(i,3)))-1;//2/(1+e^(-7x^3))-1
     }
     private double ensure(double value){
     	return Math.min(Math.max(value,-1),1);
