@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2854.robot;
 
 import org.usfirst.frc.team2854.robot.commands.AutoDrive;
+import org.usfirst.frc.team2854.robot.commands.AutoDriveLeft;
 import org.usfirst.frc.team2854.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2854.robot.commands.Drive;
 import org.usfirst.frc.team2854.robot.commands.GearCommand;
@@ -56,7 +57,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		System.out.println("Initialized robot");
 		
-		autonomousCommand=new AutoDrive(driveSystem,rmap.ENCODER_01,rmap.ENCODER_23);
+		autonomousCommand=new AutoDriveLeft(driveSystem,rmap.ENCODER_01,rmap.ENCODER_23);
 	}
 
 	/**
