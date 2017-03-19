@@ -11,34 +11,31 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutoDriveRight extends Command{
 	private DriveTrain driveTrain;
-	private Encoder left, right;
-	int finalLeft1, finalRight1;
+	private Encoder left;
+	final int end=300;
 	long temp;
-    public AutoDriveRight(DriveTrain pDriveTrain, Encoder a, Encoder b){
+    public AutoDriveRight(DriveTrain pDriveTrain, Encoder a){
     	//Leftaxis = LX; // left trigger
     	driveTrain=pDriveTrain;
     	left = a;
-    	right = b;
-    	finalLeft1=300;
     }
     // Called just before this Command runs the first time
     protected void initialize(){
     	left.reset();
-    	right.reset();
     	temp=System.nanoTime();
     	System.out.println("Initialized drive command");
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-    	//drive straight
-    	driveTrain.tankDrive(.5,.3);
-    	System.out.println((System.nanoTime()-temp)/1000000000);
-    	System.out.println("Encoder: "+left.get());
+    	//drive curved
+    	driveTrain.tankDrive(.5,.31);
+    	System.out.println("Autonomous Time: "+(System.nanoTime()-temp)/1000000000.0);
+    	System.out.println("Encoder (eft): "+left.get());
     	
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished(){
-    	if(left.get()>300||Math.abs(System.nanoTime()-temp)>13*Math.pow(10, 9)){
+    	if(left.get()>end||Math.abs(System.nanoTime()-temp)>13*Math.pow(10, 9)){
     		System.out.println("Auto finished");
     		return true;
     	}

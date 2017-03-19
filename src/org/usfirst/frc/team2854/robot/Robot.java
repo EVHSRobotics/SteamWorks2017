@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		System.out.println("Initialized robot");
 		
-		autonomousCommand=new AutoDriveLeft(driveSystem,rmap.ENCODER_01,rmap.ENCODER_23);
+		autonomousCommand=new AutoDrive(driveSystem,rmap.ENCODER_01);
 	}
 
 	/**

@@ -11,19 +11,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutoDrive extends Command{
 	private DriveTrain driveTrain;
-	private Encoder left, right;
+	private Encoder left;
 	int finalLeft1, finalRight1;
 	long temp;
-    public AutoDrive(DriveTrain pDriveTrain, Encoder a, Encoder b){
+    public AutoDrive(DriveTrain pDriveTrain, Encoder a){
     	driveTrain=pDriveTrain;
     	left = a;
-    	right = b;
     	finalLeft1=300;
     }
     // Called just before this Command runs the first time
     protected void initialize(){
     	left.reset();
-    	right.reset();
     	temp=System.nanoTime();
     	System.out.println("Initialized drive command");
     }
