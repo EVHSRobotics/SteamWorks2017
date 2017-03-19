@@ -38,7 +38,7 @@ public class AutoDriveLeft extends Command{
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished(){
-    	if(left.get()>700||Math.abs(System.nanoTime()-temp)>13*Math.pow(10, 9)){
+    	if(left.get()>300||Math.abs(System.nanoTime()-temp)>13*Math.pow(10, 9)){
     		System.out.println("Auto finished");
     		return true;
     	}
