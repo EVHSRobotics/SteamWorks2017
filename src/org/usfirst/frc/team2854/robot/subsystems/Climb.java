@@ -9,21 +9,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Climb extends Subsystem{
 	private SpeedController f;
 	private SpeedController b;
+
 	public Climb(SpeedController front,SpeedController back){
-		f = front;
-		b = back;
+		f=front;
+		b=back;
 	}
+
 	public void stop(){
 		f.set(0);
 		b.set(0);
 	}
+
 	public void run(double x){
-		double yVal = Math.pow(x, 3);
-		yVal = -(Math.abs(yVal));
+		double yVal=Math.pow(x,3);
+		yVal=-(Math.abs(yVal));
 		f.set(yVal);
 		b.set(yVal);
 	}
-    public void initDefaultCommand(){
-    	
-    }
+
+	public void initDefaultCommand(){
+
+	}
 }

@@ -26,37 +26,37 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot {
+public class Robot extends IterativeRobot{
 
 	public static OI oi;
 	public static DriveTrain driveSystem;
 	public static Climb climbSys;
 	public static Gears gearsys;
-	CameraServer server; 
+	CameraServer server;
 
 	Command autonomousCommand;
 	Command drive;
 	Command climbcommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Command> chooser=new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
-	public void robotInit() {
-		oi = new OI();
+	public void robotInit(){
+		oi=new OI();
 		RMap rmap=new RMap();
 		driveSystem=new DriveTrain(rmap.CANTALON_0,rmap.CANTALON_1,rmap.CANTALON_2,rmap.CANTALON_3);
-		climbSys= new Climb(rmap.CLIMBTALON_6, rmap.CLIMBTALON_5);
+		climbSys=new Climb(rmap.CLIMBTALON_6,rmap.CLIMBTALON_5);
 		gearsys=new Gears(rmap.Servo2,rmap.Servo3);
 		server=CameraServer.getInstance();
 		server.startAutomaticCapture();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auto mode",chooser);
 		System.out.println("Initialized robot");
-		
+
 		autonomousCommand=new AutoDrive(driveSystem,rmap.ENCODER_01);
 	}
 
@@ -66,12 +66,12 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
 	 */
 	@Override
-	public void disabledInit() {
+	public void disabledInit(){
 
 	}
 
 	@Override
-	public void disabledPeriodic() {
+	public void disabledPeriodic(){
 		Scheduler.getInstance().run();
 	}
 
@@ -87,7 +87,7 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
-	public void autonomousInit() {
+	public void autonomousInit(){
 		System.out.println("Initiation autonomous");
 		RMap.Servo2.setAngle(45);
 		RMap.Servo3.setAngle(90);
@@ -100,25 +100,27 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)autonomousCommand.start();
+		if (autonomousCommand!=null)
+			autonomousCommand.start();
 	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	@Override
-	public void autonomousPeriodic() {
+	public void autonomousPeriodic(){
 		Scheduler.getInstance().run();
 	}
 
 	@Override
-	public void teleopInit() {
+	public void teleopInit(){
 		System.out.println("Initiation teleop");
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)autonomousCommand.cancel();
+		if (autonomousCommand!=null)
+			autonomousCommand.cancel();
 		Scheduler.getInstance().add(new Drive(driveSystem,oi.controller0.art,oi.controller0.alt,oi.controller0.alx));
 		Scheduler.getInstance().add(new ClimbCommand(climbSys,oi.controller1.arx));
 		Scheduler.getInstance().add(new GearCommand(gearsys,oi.controller1.bb));
@@ -128,7 +130,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	@Override
-	public void teleopPeriodic() {
+	public void teleopPeriodic(){
 		Scheduler.getInstance().run();
 	}
 
@@ -136,7 +138,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during test mode
 	 */
 	@Override
-	public void testPeriodic() {
+	public void testPeriodic(){
 		LiveWindow.run();
 	}
 }

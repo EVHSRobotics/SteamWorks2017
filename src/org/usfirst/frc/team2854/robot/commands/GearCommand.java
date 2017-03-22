@@ -13,27 +13,33 @@ import edu.wpi.first.wpilibj.command.Command;
 public class GearCommand extends Command{
 	private Gears gear;
 	private Button button1;
-	//axis a2 refers to axis(2) of joystick 0
-    public GearCommand(Gears gears, Button a){
-    	gear = gears;
-    	button1 = a;
-    }
-    protected void initialize(){
-    	requires(gear);
-    }
-    protected void execute(){
-    	if(button1.get())
-    		gear.close();
-    	else
-    		gear.open();
-    }
-    protected boolean isFinished(){
-        return false;
-    }
-    	protected void end(){
-    	gear.stop();
-    }
-    protected void interrupted(){
-    	gear.stop();
-    }
+
+	// axis a2 refers to axis(2) of joystick 0
+	public GearCommand(Gears gears,Button a){
+		gear=gears;
+		button1=a;
+	}
+
+	protected void initialize(){
+		requires(gear);
+	}
+
+	protected void execute(){
+		if (button1.get())
+			gear.close();
+		else
+			gear.open();
+	}
+
+	protected boolean isFinished(){
+		return false;
+	}
+
+	protected void end(){
+		gear.stop();
+	}
+
+	protected void interrupted(){
+		gear.stop();
+	}
 }
