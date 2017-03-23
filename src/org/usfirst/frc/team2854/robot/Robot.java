@@ -1,16 +1,9 @@
 
 package org.usfirst.frc.team2854.robot;
 
-import org.usfirst.frc.team2854.robot.commands.AutoDrive;
-import org.usfirst.frc.team2854.robot.commands.AutoDriveLeft;
-import org.usfirst.frc.team2854.robot.commands.ClimbCommand;
-import org.usfirst.frc.team2854.robot.commands.Drive;
-import org.usfirst.frc.team2854.robot.commands.GearCommand;
-import org.usfirst.frc.team2854.robot.subsystems.Climb;
-import org.usfirst.frc.team2854.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team2854.robot.subsystems.Gears;
+import org.usfirst.frc.team2854.robot.commands.*;
+import org.usfirst.frc.team2854.robot.subsystems.*;
 
-import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
